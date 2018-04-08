@@ -25,7 +25,7 @@
     
     UIFont * _font ;
     UIColor *_textColor ;
-    NSTextAlignment  _alignment ;
+    NSTextAlignment _alignment ;
     
 }
 
@@ -76,12 +76,16 @@
 }
 
 - (AsyncLayerDisplayTask *)newAsyncDisplayTask {
+    
     AsyncLayerDisplayTask * task = [AsyncLayerDisplayTask new];
     task.willDisplay = ^(CALayer * layer){
         [layer removeAnimationForKey:@"contents"];
     };
     
     task.display = ^(CGContextRef context, CGSize size) {
+        
+    };
+    task.didDisplay = ^(CALayer *layer, BOOL finished) {
         
     };
     return task;
