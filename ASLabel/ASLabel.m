@@ -12,10 +12,15 @@
 
 #import "NSAttributedString+ASAdd.h"
 
+@interface ASLabel ()<AsyncLayerDelegate>
 
-@implementation ASLabel{
+@end
+
+@implementation ASLabel {
     
     ASTextLayout * _innerTextLayout ;
+    ASTextContainer * _textContainer ;
+    
     NSMutableAttributedString *_innerText ;
     
     UIFont * _font ;
@@ -35,12 +40,22 @@
 - (void)_initLabel{
     
     ((ASAsyncLayer *)self.layer).displaysAsynchronously = NO;
+    _innerTextLayout = [ASTextLayout new];
+    _textContainer = [ASTextContainer new];
+    
     _font = [UIFont systemFontOfSize:17];
     _textColor = [UIColor blackColor];
     _alignment = NSTextAlignmentLeft ;
 }
 
+- (void)setFrame:(CGRect)frame{
+    [super setFrame:frame];
+    _textContainer.size = self.bounds.size ;
+}
 
++ (Class)layerClass{
+    return [ASAsyncLayer class];
+}
 
 //properties
 - (void)setText:(NSString *)text {
@@ -55,9 +70,28 @@
         _innerText.color = _textColor ;
         _innerText.alignment = _alignment ;
     }
+    [self _clearInnerLayout];
+    [self.layer setNeedsDisplay];
+    
+}
 
+- (AsyncLayerDisplayTask *)newAsyncDisplayTask {
+    AsyncLayerDisplayTask * task = [AsyncLayerDisplayTask new];
+    task.willDisplay = ^(CALayer * layer){
+        [layer removeAnimationForKey:@"contents"];
+    };
     
-    
+    task.display = ^(CGContextRef context, CGSize size) {
+        
+    };
+    return task;
+}
+
+
+
+
+- (void)_clearInnerLayout{
+    _innerTextLayout = nil ;
 }
 
 @end

@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import <CoreText/CoreText.h>
+
+#import "ASLabel.h"
+
 @interface ViewController ()
 
 @end
@@ -32,7 +35,9 @@
     
     [self.view addSubview:lbl];
     
-    
+    ASLabel * l = [ASLabel new];
+    l.text = @"2222222";
+    [self.view addSubview:l];
 }
 
 

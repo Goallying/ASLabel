@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5548C4892079C7AC004D7368 /* ASTextContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5548C4882079C7AC004D7368 /* ASTextContainer.m */; };
+		5548C48C2079E17C004D7368 /* ASTextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5548C48B2079E17C004D7368 /* ASTextLine.m */; };
 		AE48B69E20775CB300E3B1F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48B69D20775CB300E3B1F8 /* AppDelegate.m */; };
 		AE48B6A120775CB300E3B1F8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48B6A020775CB300E3B1F8 /* ViewController.m */; };
 		AE48B6A420775CB300E3B1F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE48B6A220775CB300E3B1F8 /* Main.storyboard */; };
@@ -20,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5548C4872079C7AC004D7368 /* ASTextContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASTextContainer.h; sourceTree = "<group>"; };
+		5548C4882079C7AC004D7368 /* ASTextContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASTextContainer.m; sourceTree = "<group>"; };
+		5548C48A2079E17C004D7368 /* ASTextLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASTextLine.h; sourceTree = "<group>"; };
+		5548C48B2079E17C004D7368 /* ASTextLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASTextLine.m; sourceTree = "<group>"; };
 		AE48B69920775CB300E3B1F8 /* ASLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE48B69C20775CB300E3B1F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AE48B69D20775CB300E3B1F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -51,6 +57,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5548C48D2079E188004D7368 /* ASLabelTool */ = {
+			isa = PBXGroup;
+			children = (
+				AE48B6B52077641100E3B1F8 /* ASTextLayout.h */,
+				AE48B6B62077641100E3B1F8 /* ASTextLayout.m */,
+				5548C4872079C7AC004D7368 /* ASTextContainer.h */,
+				5548C4882079C7AC004D7368 /* ASTextContainer.m */,
+				AE66BFC32078E6E300C4459A /* ASAsyncLayer.h */,
+				AE66BFC42078E6E300C4459A /* ASAsyncLayer.m */,
+				5548C48A2079E17C004D7368 /* ASTextLine.h */,
+				5548C48B2079E17C004D7368 /* ASTextLine.m */,
+				AE48B6B8207765D800E3B1F8 /* NSAttributedString+ASAdd.h */,
+				AE48B6B9207765D800E3B1F8 /* NSAttributedString+ASAdd.m */,
+			);
+			path = ASLabelTool;
+			sourceTree = "<group>";
+		};
 		AE48B69020775CB300E3B1F8 = {
 			isa = PBXGroup;
 			children = (
@@ -70,18 +93,13 @@
 		AE48B69B20775CB300E3B1F8 /* ASLabel */ = {
 			isa = PBXGroup;
 			children = (
+				5548C48D2079E188004D7368 /* ASLabelTool */,
 				AE48B69C20775CB300E3B1F8 /* AppDelegate.h */,
 				AE48B69D20775CB300E3B1F8 /* AppDelegate.m */,
 				AE48B69F20775CB300E3B1F8 /* ViewController.h */,
 				AE48B6A020775CB300E3B1F8 /* ViewController.m */,
-				AE48B6B52077641100E3B1F8 /* ASTextLayout.h */,
-				AE48B6B62077641100E3B1F8 /* ASTextLayout.m */,
 				AE48B6B22077626600E3B1F8 /* ASLabel.h */,
 				AE48B6B32077626600E3B1F8 /* ASLabel.m */,
-				AE66BFC32078E6E300C4459A /* ASAsyncLayer.h */,
-				AE66BFC42078E6E300C4459A /* ASAsyncLayer.m */,
-				AE48B6B8207765D800E3B1F8 /* NSAttributedString+ASAdd.h */,
-				AE48B6B9207765D800E3B1F8 /* NSAttributedString+ASAdd.m */,
 				AE48B6A220775CB300E3B1F8 /* Main.storyboard */,
 				AE48B6A520775CB300E3B1F8 /* Assets.xcassets */,
 				AE48B6A720775CB300E3B1F8 /* LaunchScreen.storyboard */,
@@ -162,6 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5548C4892079C7AC004D7368 /* ASTextContainer.m in Sources */,
 				AE48B6BA207765D800E3B1F8 /* NSAttributedString+ASAdd.m in Sources */,
 				AE48B6B42077626600E3B1F8 /* ASLabel.m in Sources */,
 				AE48B6A120775CB300E3B1F8 /* ViewController.m in Sources */,
@@ -169,6 +188,7 @@
 				AE66BFC52078E6E300C4459A /* ASAsyncLayer.m in Sources */,
 				AE48B69E20775CB300E3B1F8 /* AppDelegate.m in Sources */,
 				AE48B6B72077641100E3B1F8 /* ASTextLayout.m in Sources */,
+				5548C48C2079E17C004D7368 /* ASTextLine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
