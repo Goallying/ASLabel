@@ -16,62 +16,80 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
 
 + (ASTextLayout *)layoutWithContainer:(ASTextContainer *)container text:(NSAttributedString *)text{
     
+    NSMutableAttributedString * s = [[NSMutableAttributedString alloc]initWithString:text.string attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    CTFramesetterRef frameSetterRef = CTFramesetterCreateWithAttributedString((CFTypeRef)s);
+    CGSize frameSize = CGSizeMake(100, CGFLOAT_MAX);
+    CGSize txtSize = CTFramesetterSuggestFrameSizeWithConstraints(frameSetterRef, CFRangeMake(0, 0), NULL, frameSize, NULL);
+    
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddRect(path, NULL, CGRectMake(0, 0, 100, txtSize.height));
+    
+    CTFrameRef frameRef = CTFramesetterCreateFrame(frameSetterRef, CFRangeMake(0, 0), path, NULL);
+    
     ASTextLayout * txtLayout = [[ASTextLayout alloc]init];
-    txtLayout.text = text ;
+    txtLayout.text = s ;
     txtLayout.container = container ;
+    txtLayout.frameRef = frameRef ;
+    txtLayout.frameHeight = txtSize.height ;
+    return txtLayout ;
     
-    CGRect rect = (CGRect){CGPointZero ,container.size};
-    rect = UIEdgeInsetsInsetRect(rect, container.insets);
-    rect = CGRectStandardize(rect);
-    
-    CGRect pathBoxRct = rect ;
-    rect = CGRectApplyAffineTransform(rect, CGAffineTransformMakeScale(1, -1));
-    CGPathRef pathRef = CGPathCreateWithRect(rect, NULL);
-    if (!pathRef) {
-        NSLog(@"pathRef error");
-        return nil ;
-    }
-    // 未添加任何属性。
-    NSMutableDictionary * frameAttrs = [NSMutableDictionary dictionary];
-    CTFramesetterRef frameSetterRef = CTFramesetterCreateWithAttributedString((CFTypeRef)text);
-    if (!frameSetterRef) {
-        NSLog(@"framsetterRef error");
-        return nil;
-    }
-    //CTFrame的大小就是container - insets 的大小
-    CTFrameRef frameRef = CTFramesetterCreateFrame(frameSetterRef, CFRangeMake(0, text.length), pathRef, (CFTypeRef)frameAttrs);
-    if (!frameRef) {
-        NSLog(@"frameRef error");
-        return nil ;
-    }
-    CFArrayRef linesRef = CTFrameGetLines(frameRef);
-    CFIndex  linesCount = CFArrayGetCount(linesRef);
-    
-    CGPoint *lineOrigins = NULL;
-    if (linesCount > 0) {
-        lineOrigins = malloc(linesCount * sizeof(CGPoint));
-        if (lineOrigins == NULL) {
-            NSLog(@"lineOringins Error");
-            return nil ;
-        }
-        CTFrameGetLineOrigins(frameRef, CFRangeMake(0, linesCount), lineOrigins);
-    }
-    // calculate line frame
-    for (NSUInteger i = 0; i < linesCount; i ++) {
-        CTLineRef lineRef = CFArrayGetValueAtIndex(linesRef, i);
-        CFArrayRef runsRef = CTLineGetGlyphRuns(lineRef);
-        if (!runsRef || CFArrayGetCount(runsRef) == 0) {
-            continue ;
-        }
-        CGPoint lineOringin = lineOrigins[i];
-        CGPoint position;
-        position.x = pathBoxRct.origin.x + lineOringin.x;
-        position.y = pathBoxRct.size.height + pathBoxRct.origin.y - lineOringin.y;
-        
-        ASTextLine * aLine = [ASTextLine lineWithCTLine:lineRef position:position];
-        
-        
-    }
+//    ASTextLayout * txtLayout = [[ASTextLayout alloc]init];
+//    txtLayout.text = text ;
+//    txtLayout.container = container ;
+//
+//    CGRect rect = (CGRect){CGPointZero ,container.size};
+//    rect = UIEdgeInsetsInsetRect(rect, container.insets);
+//    rect = CGRectStandardize(rect);
+//
+//    CGRect pathBoxRct = rect ;
+//    rect = CGRectApplyAffineTransform(rect, CGAffineTransformMakeScale(1, -1));
+//    CGPathRef pathRef = CGPathCreateWithRect(rect, NULL);
+//    if (!pathRef) {
+//        NSLog(@"pathRef error");
+//        return nil ;
+//    }
+//    // 未添加任何属性。
+//    NSMutableDictionary * frameAttrs = [NSMutableDictionary dictionary];
+//    CTFramesetterRef frameSetterRef = CTFramesetterCreateWithAttributedString((CFTypeRef)text);
+//    if (!frameSetterRef) {
+//        NSLog(@"framsetterRef error");
+//        return nil;
+//    }
+//    //CTFrame的大小就是container - insets 的大小
+//    CTFrameRef frameRef = CTFramesetterCreateFrame(frameSetterRef, CFRangeMake(0, text.length), pathRef, (CFTypeRef)frameAttrs);
+//    if (!frameRef) {
+//        NSLog(@"frameRef error");
+//        return nil ;
+//    }
+//    CFArrayRef linesRef = CTFrameGetLines(frameRef);
+//    CFIndex  linesCount = CFArrayGetCount(linesRef);
+//
+//    CGPoint *lineOrigins = NULL;
+//    if (linesCount > 0) {
+//        lineOrigins = malloc(linesCount * sizeof(CGPoint));
+//        if (lineOrigins == NULL) {
+//            NSLog(@"lineOringins Error");
+//            return nil ;
+//        }
+//        CTFrameGetLineOrigins(frameRef, CFRangeMake(0, linesCount), lineOrigins);
+//    }
+//    // calculate line frame
+//    for (NSUInteger i = 0; i < linesCount; i ++) {
+//        CTLineRef lineRef = CFArrayGetValueAtIndex(linesRef, i);
+//        CFArrayRef runsRef = CTLineGetGlyphRuns(lineRef);
+//        if (!runsRef || CFArrayGetCount(runsRef) == 0) {
+//            continue ;
+//        }
+//        CGPoint lineOringin = lineOrigins[i];
+//        CGPoint position;
+//        position.x = pathBoxRct.origin.x + lineOringin.x;
+//        position.y = pathBoxRct.size.height + pathBoxRct.origin.y - lineOringin.y;
+//
+//        ASTextLine * aLine = [ASTextLine lineWithCTLine:lineRef position:position];
+//
+//
+//    }
     
     
     
@@ -84,7 +102,6 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
 ////    if (lineRowsIndex) free(lineRowsIndex);
 //    return nil;
     
-    return nil ;
 }
 
 

@@ -46,11 +46,15 @@
     _font = [UIFont systemFontOfSize:17];
     _textColor = [UIColor blackColor];
     _alignment = NSTextAlignmentLeft ;
+    
+    _innerText = [NSMutableAttributedString new];
 }
 
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
     _textContainer.size = self.bounds.size ;
+    
+    NSLog(@"w==== %f ,h == %f",_textContainer.size.width ,_textContainer.size.height);
 }
 
 + (Class)layerClass{
@@ -84,9 +88,18 @@
     
     task.display = ^(CGContextRef context, CGSize size) {
         
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
+        CGContextTranslateCTM(ctx, 0, 100);
+        CGContextScaleCTM(ctx, 1, -1);
+        
+        ASTextLayout * txtLayout = [ASTextLayout layoutWithContainer:_textContainer text:_innerText];
+        CTFrameDraw(txtLayout.frameRef, ctx);
     };
     task.didDisplay = ^(CALayer *layer, BOOL finished) {
-        
+//        __strong ASLabel *view = (ASLabel *)layer.delegate;
+//        view->_innerTextLayout = _innerTextLayout;
+
     };
     return task;
 }
