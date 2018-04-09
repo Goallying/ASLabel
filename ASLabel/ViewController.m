@@ -35,7 +35,7 @@
     
     [self.view addSubview:lbl];
     
-    ASLabel * l = [[ASLabel alloc]initWithFrame:CGRectMake(10, 150, 100,21)];
+    ASLabel * l = [[ASLabel alloc]initWithFrame:self.view.bounds];
     l.text = @"2222222";
     l.backgroundColor = [UIColor redColor];
     [self.view addSubview:l];

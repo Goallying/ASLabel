@@ -54,7 +54,7 @@
     [super setFrame:frame];
     _textContainer.size = self.bounds.size ;
     
-    NSLog(@"w==== %f ,h == %f",_textContainer.size.width ,_textContainer.size.height);
+//    NSLog(@"w==== %f ,h == %f",_textContainer.size.width ,_textContainer.size.height);
 }
 
 + (Class)layerClass{
@@ -82,19 +82,22 @@
 - (AsyncLayerDisplayTask *)newAsyncDisplayTask {
     
     AsyncLayerDisplayTask * task = [AsyncLayerDisplayTask new];
-    task.willDisplay = ^(CALayer * layer){
-        [layer removeAnimationForKey:@"contents"];
-    };
+//    task.willDisplay = ^(CALayer * layer){
+//        [layer removeAnimationForKey:@"contents"];
+//    };
     
     task.display = ^(CGContextRef context, CGSize size) {
         
-        CGContextRef ctx = UIGraphicsGetCurrentContext();
-        CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
-        CGContextTranslateCTM(ctx, 0, 100);
-        CGContextScaleCTM(ctx, 1, -1);
+     
         
         ASTextLayout * txtLayout = [ASTextLayout layoutWithContainer:_textContainer text:_innerText];
-        CTFrameDraw(txtLayout.frameRef, ctx);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            CGContextRef ctx = UIGraphicsGetCurrentContext();
+//            CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
+//            CGContextTranslateCTM(ctx, 0, 100);
+//            CGContextScaleCTM(ctx, 1, -1);
+            CTFrameDraw(txtLayout.frameRef, ctx);
+        });
     };
     task.didDisplay = ^(CALayer *layer, BOOL finished) {
 //        __strong ASLabel *view = (ASLabel *)layer.delegate;

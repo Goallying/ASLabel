@@ -16,7 +16,7 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
 
 + (ASTextLayout *)layoutWithContainer:(ASTextContainer *)container text:(NSAttributedString *)text{
     
-    NSMutableAttributedString * s = [[NSMutableAttributedString alloc]initWithString:text.string attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    NSMutableAttributedString * s = [[NSMutableAttributedString alloc]initWithString:text.string attributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     
     CTFramesetterRef frameSetterRef = CTFramesetterCreateWithAttributedString((CFTypeRef)s);
     CGSize frameSize = CGSizeMake(100, CGFLOAT_MAX);
