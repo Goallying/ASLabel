@@ -45,6 +45,14 @@
 //    CGContextTranslateCTM(ctx, 0, self.bounds.size.height);
     CFArrayRef lines = CTFrameGetLines(frame);
     CFIndex lineCount = CFArrayGetCount(lines);
+    CGPoint *lineOrigins = malloc(lineCount * sizeof(CGPoint)) ;
+    CTFrameGetLineOrigins(frame, CFRangeMake(0, lineCount), lineOrigins);
+    
+    //CGRectStandardize 用法
+//     CGRectStandardize(testRect)
+//     standardizeRect.size.width = fabsf(testRect.size.width)//testRect.size.width 的绝对值
+//     standardizeRect.size.height = fabsf(testRect.size.height)//testRect.size.height 的绝对值
+    
     for (int i = 0 ; i < lineCount;  i ++) {
         CTLineRef l = CFArrayGetValueAtIndex(lines, i);
         CFArrayRef runs = CTLineGetGlyphRuns(l);
