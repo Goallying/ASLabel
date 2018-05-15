@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5548C4892079C7AC004D7368 /* ASTextContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5548C4882079C7AC004D7368 /* ASTextContainer.m */; };
 		5548C48C2079E17C004D7368 /* ASTextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5548C48B2079E17C004D7368 /* ASTextLine.m */; };
+		556AB44920AA826400907ED5 /* DisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 556AB44820AA826400907ED5 /* DisplayView.m */; };
 		AE48B69E20775CB300E3B1F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48B69D20775CB300E3B1F8 /* AppDelegate.m */; };
 		AE48B6A120775CB300E3B1F8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48B6A020775CB300E3B1F8 /* ViewController.m */; };
 		AE48B6A420775CB300E3B1F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE48B6A220775CB300E3B1F8 /* Main.storyboard */; };
@@ -26,6 +27,8 @@
 		5548C4882079C7AC004D7368 /* ASTextContainer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASTextContainer.m; sourceTree = "<group>"; };
 		5548C48A2079E17C004D7368 /* ASTextLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASTextLine.h; sourceTree = "<group>"; };
 		5548C48B2079E17C004D7368 /* ASTextLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASTextLine.m; sourceTree = "<group>"; };
+		556AB44720AA826400907ED5 /* DisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisplayView.h; sourceTree = "<group>"; };
+		556AB44820AA826400907ED5 /* DisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisplayView.m; sourceTree = "<group>"; };
 		AE48B69920775CB300E3B1F8 /* ASLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE48B69C20775CB300E3B1F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AE48B69D20775CB300E3B1F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -98,6 +101,8 @@
 				AE48B69D20775CB300E3B1F8 /* AppDelegate.m */,
 				AE48B69F20775CB300E3B1F8 /* ViewController.h */,
 				AE48B6A020775CB300E3B1F8 /* ViewController.m */,
+				556AB44720AA826400907ED5 /* DisplayView.h */,
+				556AB44820AA826400907ED5 /* DisplayView.m */,
 				AE48B6B22077626600E3B1F8 /* ASLabel.h */,
 				AE48B6B32077626600E3B1F8 /* ASLabel.m */,
 				AE48B6A220775CB300E3B1F8 /* Main.storyboard */,
@@ -189,6 +194,7 @@
 				AE48B69E20775CB300E3B1F8 /* AppDelegate.m in Sources */,
 				AE48B6B72077641100E3B1F8 /* ASTextLayout.m in Sources */,
 				5548C48C2079E17C004D7368 /* ASTextLine.m in Sources */,
+				556AB44920AA826400907ED5 /* DisplayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

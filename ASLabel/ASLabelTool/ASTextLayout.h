@@ -14,9 +14,7 @@
 
 @property (nonatomic, readwrite) NSAttributedString *text;
 @property (nonatomic, readwrite) ASTextContainer *container;
-
-@property (nonatomic ,assign)CTFrameRef frameRef ;
-@property (nonatomic ,assign)CGFloat frameHeight ;
+@property (nonatomic ,strong)NSArray * lines ;
 
 + (ASTextLayout *)layoutWithContainer:(ASTextContainer *)container text:(NSAttributedString *)text ;
 @end
