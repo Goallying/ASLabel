@@ -14,6 +14,7 @@
 
 - (void)drawRect:(CGRect)rect {
     
+    //一下代码是最最最最基本的文字绘画过程。
     CGContextRef ctx = UIGraphicsGetCurrentContext() ;
     
 //    CGAffineTransformTranslate/Rotate/Scale    //平移，旋转， 缩放
@@ -25,7 +26,7 @@
 //    CGMutablePathRef path = CGPathCreateMutable() ;
 //    CGPathAddRect(path, NULL, self.bounds);
     
-    NSAttributedString * s = [[NSAttributedString alloc]initWithString:@"Helloworld1234567890"];
+    NSAttributedString * s = [[NSAttributedString alloc]initWithString:@"Hello world 1234567890"];
     
     NSMutableDictionary *  frameAttrs = [NSMutableDictionary dictionary];
     frameAttrs[(id)kCTFontAttributeName] = @12 ;
@@ -74,7 +75,12 @@
         CFIndex runCount = CFArrayGetCount(runs);
         for (int j = 0 ; j < runCount; j ++) {
             CTRunRef run = CFArrayGetValueAtIndex(runs, j);
-            CGContextSetTextPosition(ctx, 0, self.bounds.size.height - textline.bounds.size.height);
+            
+            
+            CGFloat posX = textline.position.x;
+            CGFloat posY = self.bounds.size.height - textline.position.y;
+            //quarz coordinate.
+            CGContextSetTextPosition(ctx, posX , posY);
             CTRunDraw(run, ctx, CFRangeMake(0, 0));
             
            //CTRun height! CTLine.size.

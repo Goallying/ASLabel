@@ -42,7 +42,7 @@
 //    [self.view addSubview:l];
     
     
-    DisplayView * v = [[DisplayView alloc]initWithFrame:CGRectMake(100, 100,200, 100)];
+    DisplayView * v = [[DisplayView alloc]initWithFrame:CGRectMake(100, 100,100, 100)];
     v.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:v];
 }
