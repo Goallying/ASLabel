@@ -26,6 +26,13 @@
 }
 
 - (void)_initLine:(CTLineRef)line {
+    
+    if (_CTLine != line) {
+        if (line) CFRetain(line);
+        if (_CTLine) CFRelease(_CTLine);
+        _CTLine = line;
+    }
+    
     _lineWidth = CTLineGetTypographicBounds(line, &_ascent, &_descent, &_leading);
     if (CTLineGetGlyphCount(line) > 0) {
         CFArrayRef runs = CTLineGetGlyphRuns(line);

@@ -17,6 +17,7 @@
 @property (nonatomic, readonly) CGFloat leading;
 @property (nonatomic, readonly) CGFloat lineWidth;
 @property (nonatomic, readonly) CGRect bounds;
+@property (nonatomic, readonly) CTLineRef CTLine;
 
 + (instancetype)lineWithCTLine:(CTLineRef)CTLine position:(CGPoint)position ;
 
