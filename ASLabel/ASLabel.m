@@ -18,6 +18,7 @@
 
 @implementation ASLabel {
     
+    @private
     ASTextLayout * _innerTextLayout ;
     ASTextContainer * _textContainer ;
     
@@ -26,6 +27,7 @@
     UIFont * _font ;
     UIColor *_textColor ;
     NSTextAlignment _alignment ;
+    NSTextVerticalAlignment _verticalAlignment ;
     
 }
 
@@ -46,6 +48,7 @@
     _font = [UIFont systemFontOfSize:17];
     _textColor = [UIColor blackColor];
     _alignment = NSTextAlignmentLeft ;
+    _verticalAlignment = NSTextVerticalAlignmentCenter ;
     
     _innerText = [NSMutableAttributedString new];
 }
@@ -62,11 +65,16 @@
 #pragma mark -- setter
 //properties
 - (void)setText:(NSString *)text {
-
-    _innerText = [[NSMutableAttributedString alloc]initWithString:text];
-    _innerText.font = _font ;
-    _innerText.color = _textColor ;
-    _innerText.alignment = _alignment ;
+    if ([_text isEqualToString:text])  return ;
+    _text = text ;
+    //反复赋值text ，不需要重新更新文字颜色字体，排版方式。
+    BOOL needResetAttributes = (_innerText.length == 0 && text.length > 0) ;
+    [_innerText replaceCharactersInRange:NSMakeRange(0, _innerText.length) withString:text ? text : @""];
+    if (needResetAttributes) {
+        _innerText.font = _font ;
+        _innerText.color = _textColor ;
+        _innerText.alignment = _alignment ;
+    }
     [self.layer setNeedsDisplay];
 }
 - (void)setTextContainerInset:(UIEdgeInsets)textContainerInset{
@@ -74,11 +82,13 @@
     [self.layer setNeedsDisplay];
 }
 - (void)setTextAlignment:(NSTextAlignment)textAlignment{
-    if (_innerText.alignment == textAlignment) {
-        return;
-    }
+    if (_alignment == textAlignment) return;
+    _alignment = textAlignment ;
     _innerText.alignment = textAlignment ;
     [self.layer setNeedsDisplay];
+}
+- (void)setVerticalAlignment:(NSTextVerticalAlignment)verticalAlignment{
+    _verticalAlignment = verticalAlignment ;
 }
 #pragma mark --
 #pragma mark -- 异步绘制
@@ -89,6 +99,12 @@
         NSLog(@"will display...");
     };
     task.display = ^(CGContextRef context, CGSize size) {
+        CGPoint verticalp = CGPointZero ; //if verticalAlignment == top
+        //需要计算文本内容总高度。
+        if (_verticalAlignment == NSTextVerticalAlignmentCenter) {
+        }else if (_verticalAlignment == NSTextVerticalAlignmentBottom){
+            
+        }
         ASTextLayout * layout = [ASTextLayout layoutWithContainer:_textContainer text:_innerText];
         [layout drawInContext:context size:size];
         NSLog(@"display...");

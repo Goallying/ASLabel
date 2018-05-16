@@ -13,7 +13,7 @@
 @property (nullable, nonatomic, strong, readonly) UIFont  *font;
 @property (nullable, nonatomic, strong, readonly) UIColor *color;
 @property (nullable, nonatomic, strong, readonly) UIColor *backgroundColor;
-@property (nonatomic, readwrite) NSTextAlignment alignment;
+@property (nonatomic, readonly) NSTextAlignment alignment;
 @property (nullable, nonatomic, strong, readonly) NSParagraphStyle *paragraphStyle;
 
 @end

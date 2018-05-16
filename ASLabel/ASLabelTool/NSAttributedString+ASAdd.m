@@ -93,8 +93,6 @@
         [self addAttribute:NSParagraphStyleAttributeName value:style range:range];
     }];
 }
-
-
 - (void)removeAttributes:(NSRange)range{
     
     NSArray *keys = [NSMutableAttributedString allDiscontinuousAttributeKeys];
