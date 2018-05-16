@@ -33,6 +33,7 @@
 //    [self.view addSubview:lbl];
     
     ASLabel * l = [[ASLabel alloc]initWithFrame:self.view.bounds];
+    l.textContainerInset = UIEdgeInsetsMake(20, 0, 0, 0);
     l.text = @"Hello world 1234567890习近平在讲话中强调，党的十八大以来，在党中央坚强领导下，我们积极推进外交理论和实践创新，完善和深化全方位外交布局，倡导和推进“一带一路”建设，深入参与全球治理体系改革和建设，坚定捍卫国家主权、安全、发展利益，加强党对外事工作的集中统一领导，走出了一条中国特色大国外交新路，取得了历史性成就";
     l.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:l];

@@ -69,6 +69,13 @@
     _innerText.alignment = _alignment ;
     [self.layer setNeedsDisplay];
 }
+- (void)setTextContainerInset:(UIEdgeInsets)textContainerInset{
+    _textContainer.insets = textContainerInset ;
+    [self.layer setNeedsDisplay];
+}
+- (void)setTextAlignment:(NSTextAlignment)textAlignment{
+    
+}
 
 - (AsyncLayerDisplayTask *)newAsyncDisplayTask {
     
