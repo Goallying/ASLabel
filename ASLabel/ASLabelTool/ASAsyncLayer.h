@@ -19,16 +19,13 @@
 
 @protocol AsyncLayerDelegate <NSObject>
 @required
-
 - (AsyncLayerDisplayTask *)newAsyncDisplayTask;
 @end
 
 @interface AsyncLayerDisplayTask : NSObject
 
 @property (nonatomic, copy) void (^willDisplay)(CALayer *layer);
-
 @property (nonatomic, copy) void (^display)(CGContextRef context, CGSize size);
-
 @property (nonatomic, copy) void (^didDisplay)(CALayer *layer, BOOL finished);
 
 @end

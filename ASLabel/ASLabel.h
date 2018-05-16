@@ -11,8 +11,8 @@
 @interface ASLabel : UIView
 
 @property (nonatomic ,copy)NSString * text ;
-@property (nonatomic ,assign)NSTextAlignment * textAlignment ;
+@property (nonatomic ,assign)NSTextAlignment textAlignment ;
 @property (nonatomic ,assign)NSInteger numberOfLines ;
-
+@property (nonatomic) UIEdgeInsets textContainerInset;
 
 @end

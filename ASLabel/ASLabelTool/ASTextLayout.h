@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ASTextContainer.h"
 #import <CoreText/CoreText.h>
+#import "ASTextContainer.h"
+#import "ASTextLine.h"
 
 @interface ASTextLayout : NSObject
 
-@property (nonatomic, readwrite) NSAttributedString *text;
-@property (nonatomic, readwrite) ASTextContainer *container;
-@property (nonatomic ,strong)NSArray * lines ;
+@property (nonatomic, strong) NSAttributedString *text;
+@property (nonatomic, strong) ASTextContainer *container;
+@property (nonatomic ,strong) NSArray<ASTextLine *> *lines ;
 
 + (ASTextLayout *)layoutWithContainer:(ASTextContainer *)container text:(NSAttributedString *)text ;
+- (void)drawInContext:(CGContextRef)ctx size:(CGSize)size ;
+
 @end

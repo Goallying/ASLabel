@@ -26,10 +26,14 @@
 //    CGMutablePathRef path = CGPathCreateMutable() ;
 //    CGPathAddRect(path, NULL, self.bounds);
     
-    NSAttributedString * s = [[NSAttributedString alloc]initWithString:@"Hello world 1234567890"];
+    NSMutableAttributedString * s = [[NSMutableAttributedString alloc]initWithString:@"Hello world 1234567890习近平在讲话中强调，党的十八大以来，在党中央坚强领导下，我们积极推进外交理论和实践创新，完善和深化全方位外交布局，倡导和推进“一带一路”建设，深入参与全球治理体系改革和建设，坚定捍卫国家主权、安全、发展利益，加强党对外事工作的集中统一领导，走出了一条中国特色大国外交新路，取得了历史性成就"];
     
     NSMutableDictionary *  frameAttrs = [NSMutableDictionary dictionary];
-    frameAttrs[(id)kCTFontAttributeName] = @12 ;
+    // font。
+    frameAttrs[(id)kCTFontAttributeName] = [UIFont systemFontOfSize:15] ;
+    // 文字间距
+    frameAttrs[(id)kCTKernAttributeName] = @10 ;
+    [s addAttributes:frameAttrs range:NSMakeRange(0, s.length)];
     
     CGRect boxRect = (CGRect) {CGPointZero, self.bounds.size};
     rect = CGRectApplyAffineTransform(rect, CGAffineTransformMakeScale(1, -1));

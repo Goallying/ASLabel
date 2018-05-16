@@ -39,7 +39,7 @@
 
 - (void)_initLabel{
     
-    ((ASAsyncLayer *)self.layer).displaysAsynchronously = NO;
+    ((ASAsyncLayer *)self.layer).displaysAsynchronously = YES;
     _innerTextLayout = [ASTextLayout new];
     _textContainer = [ASTextContainer new];
     
@@ -58,7 +58,8 @@
 + (Class)layerClass{
     return [ASAsyncLayer class];
 }
-
+#pragma mark --
+#pragma mark -- setter
 //properties
 - (void)setText:(NSString *)text {
 
@@ -66,29 +67,25 @@
     _innerText.font = _font ;
     _innerText.color = _textColor ;
     _innerText.alignment = _alignment ;
-    
     [self.layer setNeedsDisplay];
-    
 }
 
 - (AsyncLayerDisplayTask *)newAsyncDisplayTask {
     
     AsyncLayerDisplayTask * task = [AsyncLayerDisplayTask new];
-    
+    task.willDisplay = ^(CALayer *layer) {
+        NSLog(@"will display...");
+    };
     task.display = ^(CGContextRef context, CGSize size) {
-
-        
+        ASTextLayout * layout = [ASTextLayout layoutWithContainer:_textContainer text:_innerText];
+        [layout drawInContext:context size:size];
+        NSLog(@"display...");
     };
     task.didDisplay = ^(CALayer *layer, BOOL finished) {
-
+        NSLog(@"didDisplay...");
     };
-    
     return task;
 }
-
-
-
-
 - (void)_clearInnerLayout{
     _innerTextLayout = nil ;
 }

@@ -13,4 +13,6 @@
 @property (nonatomic ,assign)CGSize size ;
 @property (nonatomic ,assign)UIEdgeInsets insets ;
 
++ (instancetype)containerWithSize:(CGSize)size insets:(UIEdgeInsets)insets ;
+
 @end
