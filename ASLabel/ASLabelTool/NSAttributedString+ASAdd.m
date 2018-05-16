@@ -21,6 +21,11 @@
 - (UIColor *)backgroundColor{
     return [self attribute:NSBackgroundColorAttributeName atIndex:0 effectiveRange:NULL];
 }
+- (NSTextAlignment)alignment{
+    NSParagraphStyle *style = self.paragraphStyle;
+    if (!style) style = [NSParagraphStyle defaultParagraphStyle];
+    return style.alignment;
+}
 @end
 
 @implementation NSMutableAttributedString (TextAdd)
@@ -39,13 +44,31 @@
     [self addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, self.length)];
 }
 - (NSParagraphStyle *)paragraphStyle{
-    return [self attribute:NSParagraphStyleAttributeName atIndex:0 effectiveRange:NULL];
+    
+    return [self paragraphStyleAtIndex:0];
 }
-
--(NSTextAlignment)alignment{
-    NSParagraphStyle *style = self.paragraphStyle;
-    if (!style) style = [NSParagraphStyle defaultParagraphStyle];
-    return style.alignment;
+- (NSParagraphStyle *)paragraphStyleAtIndex:(NSUInteger)index {
+    /*
+     NSParagraphStyle is NOT toll-free bridged to CTParagraphStyleRef.
+     
+     CoreText can use both NSParagraphStyle and CTParagraphStyleRef,
+     but UILabel/UITextView can only use NSParagraphStyle.
+     
+     We use NSParagraphStyle in both CoreText and UIKit.
+     */
+    NSParagraphStyle *style = [self attribute:NSParagraphStyleAttributeName atIndex:index];
+    if (style) {
+        if (CFGetTypeID((__bridge CFTypeRef)(style)) == CTParagraphStyleGetTypeID()) {
+            style = [NSParagraphStyle styleWithCTStyle:(__bridge CTParagraphStyleRef)(style)];
+        }
+    }
+    return style;
+}
+- (id)attribute:(NSString *)attributeName atIndex:(NSUInteger)index {
+    if (!attributeName) return nil;
+    if (index > self.length || self.length == 0) return nil;
+    if (self.length > 0 && index == self.length) index--;
+    return [self attribute:attributeName atIndex:index effectiveRange:NULL];
 }
 
 - (void)setAlignment:(NSTextAlignment)alignment{
@@ -67,7 +90,6 @@
             style = [NSParagraphStyle defaultParagraphStyle].mutableCopy;
         }
         style.alignment = alignment;
-        
         [self addAttribute:NSParagraphStyleAttributeName value:style range:range];
     }];
 }

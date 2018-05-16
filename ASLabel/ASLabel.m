@@ -74,9 +74,14 @@
     [self.layer setNeedsDisplay];
 }
 - (void)setTextAlignment:(NSTextAlignment)textAlignment{
-    
+    if (_innerText.alignment == textAlignment) {
+        return;
+    }
+    _innerText.alignment = textAlignment ;
+    [self.layer setNeedsDisplay];
 }
-
+#pragma mark --
+#pragma mark -- 异步绘制
 - (AsyncLayerDisplayTask *)newAsyncDisplayTask {
     
     AsyncLayerDisplayTask * task = [AsyncLayerDisplayTask new];
