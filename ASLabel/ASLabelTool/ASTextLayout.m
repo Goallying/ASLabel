@@ -54,9 +54,14 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
     }
     layout.lines = textLines ;
     layout.textBoundingRect = textBoundingRect ;
+    
     CFRelease(path);
     CFRelease(frameSetter);
     CFRelease(frame);
+    if (lineOrigins) {
+        //malloc -> free.
+        free(lineOrigins);
+    }
     return layout;
 }
 
