@@ -29,9 +29,15 @@
     if (!style) style = [NSParagraphStyle defaultParagraphStyle];
     return style.alignment;
 }
+
 - (NSParagraphStyle *)paragraphStyle{
     
     return [self paragraphStyleAtIndex:0];
+}
+- (CGFloat)lineSpacing{
+    NSParagraphStyle *style = self.paragraphStyle;
+    if (!style) style = [NSParagraphStyle defaultParagraphStyle];
+    return style.lineSpacing;
 }
 - (NSParagraphStyle *)paragraphStyleAtIndex:(NSUInteger)index {
     /*
@@ -96,6 +102,28 @@
             style = [NSParagraphStyle defaultParagraphStyle].mutableCopy;
         }
         style.alignment = alignment;
+        [self addAttribute:NSParagraphStyleAttributeName value:style range:range];
+    }];
+}
+- (void)setLineSpacing:(CGFloat)lineSpacing {
+    
+    [self enumerateAttribute:NSParagraphStyleAttributeName inRange:NSMakeRange(0, self.length) options:kNilOptions usingBlock:^(NSParagraphStyle * value, NSRange range, BOOL * _Nonnull stop) {
+        NSMutableParagraphStyle *style = nil;
+        if (value) {
+            if (CFGetTypeID((__bridge CFTypeRef)(value)) == CTParagraphStyleGetTypeID()) {
+                value = [NSParagraphStyle styleWithCTStyle:(__bridge CTParagraphStyleRef)(value)];
+            }
+            if (value.lineSpacing == lineSpacing) return;
+            if ([value isKindOfClass:[NSMutableParagraphStyle class]]) {
+                style = (id)value;
+            } else {
+                style = value.mutableCopy;
+            }
+        } else {
+            if ([NSParagraphStyle defaultParagraphStyle].lineSpacing == lineSpacing) return;
+            style = [NSParagraphStyle defaultParagraphStyle].mutableCopy;
+        }
+        style.lineSpacing = lineSpacing;
         [self addAttribute:NSParagraphStyleAttributeName value:style range:range];
     }];
 }

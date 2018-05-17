@@ -28,7 +28,8 @@
     UIColor *_textColor ;
     NSTextAlignment _alignment ;
     NSTextVerticalAlignment _verticalAlignment ;
-    NSInteger _kern ;
+    NSInteger _characterSpacing ;
+    CGFloat _lineSpacing ;
     
 }
 
@@ -50,7 +51,8 @@
     _textColor = [UIColor blackColor];
     _alignment = NSTextAlignmentLeft ;
     _verticalAlignment = NSTextVerticalAlignmentCenter ;
-    _kern = 0 ;
+    _characterSpacing = 0 ;
+    _lineSpacing = 0.0 ;
     
     _innerText = [NSMutableAttributedString new];
 }
@@ -76,7 +78,8 @@
         _innerText.font = _font ;
         _innerText.color = _textColor ;
         _innerText.alignment = _alignment ;
-        _innerText.kern = _kern ;
+        _innerText.kern = _characterSpacing ;
+        _innerText.lineSpacing = _lineSpacing ;
     }
     [self.layer setNeedsDisplay];
 }
@@ -85,7 +88,9 @@
         return;
     }
     _textContainer.insets = textContainerInset ;
-    [self.layer setNeedsDisplay];
+    if (_innerText) {
+        [self.layer setNeedsDisplay];
+    }
 }
 - (void)setTextAlignment:(NSTextAlignment)textAlignment{
     if (_alignment == textAlignment) return;
@@ -98,13 +103,17 @@
 - (void)setVerticalAlignment:(NSTextVerticalAlignment)verticalAlignment{
     if(_verticalAlignment == verticalAlignment) return;
     _verticalAlignment = verticalAlignment ;
-    [self.layer setNeedsDisplay];
+    if (_innerText) {
+        [self.layer setNeedsDisplay];
+    }
 }
 - (void)setNumberOfLines:(NSInteger)numberOfLines{
     if(_numberOfLines == numberOfLines) return ;
     _numberOfLines = numberOfLines ;
     _textContainer.numberOfLines = _numberOfLines;
-    [self.layer setNeedsDisplay];
+    if (_innerText) {
+        [self.layer setNeedsDisplay];
+    }
 }
 -(void)setFont:(UIFont *)font{
     if (_font == font || [_font isEqual:font]) {
@@ -116,11 +125,19 @@
         [self.layer setNeedsDisplay];
     }
 }
-- (void)setKern:(NSInteger)kern {
-    if (_kern == kern) return ;
-    _kern = kern ;
+-(void)setCharacterSpacing:(NSInteger)characterSpacing {
+    if (_characterSpacing == characterSpacing) return ;
+    _characterSpacing = characterSpacing ;
     if (_innerText) {
-        _innerText.kern = kern ;
+        _innerText.kern = characterSpacing ;
+        [self.layer setNeedsDisplay];
+    }
+}
+- (void)setLineSpacing:(CGFloat)lineSpacing {
+    if (_lineSpacing == lineSpacing) return ;
+    _lineSpacing = lineSpacing ;
+    if (_innerText) {
+        _innerText.lineSpacing = lineSpacing ;
         [self.layer setNeedsDisplay];
     }
 }
@@ -135,8 +152,6 @@
     task.display = ^(CGContextRef context, CGSize size) {
         CGPoint verticalp = CGPointZero ; //if verticalAlignment == top
         ASTextLayout * layout = [ASTextLayout layoutWithContainer:_textContainer text:_innerText];
-        UIFont * f = _innerText.font ;
-        NSInteger kern = _innerText.kern ;
         //需要计算文本内容总高度。
         //may be a bug exist here or it's not a bug, when container's size <= container.inset rect. 纵向排版方式受insets 影响。
         if (_verticalAlignment == NSTextVerticalAlignmentCenter) {

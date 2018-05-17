@@ -20,7 +20,8 @@ typedef NS_ENUM(NSInteger, NSTextVerticalAlignment) {
 @property (nonatomic ,assign)NSTextVerticalAlignment verticalAlignment;
 @property (nonatomic ,assign)NSInteger numberOfLines ;
 @property (nonatomic ,assign)UIEdgeInsets textContainerInset;
-@property (nonatomic ,assign)NSInteger kern ; // not reasonable here,this property belongs to 'NSAttributedString', but it's convenient;
+@property (nonatomic ,assign)NSInteger characterSpacing ; // not reasonable here,this property belongs to 'NSAttributedString', but it's convenient;
+@property (nonatomic ,assign)CGFloat lineSpacing ; //above
 @property (nonatomic ,strong)UIFont * font ;
 
 @end

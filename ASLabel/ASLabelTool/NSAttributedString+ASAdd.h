@@ -17,6 +17,7 @@
 @property (nonatomic, readonly) NSTextAlignment alignment;
 @property (nullable, nonatomic, strong, readonly) NSParagraphStyle *paragraphStyle;
 @property (nonatomic, assign, readonly) NSInteger kern;
+@property (nonatomic ,assign, readonly) CGFloat lineSpacing ;
 
 @end
 
@@ -30,6 +31,8 @@
 @property (nullable, nonatomic, strong, readwrite) NSParagraphStyle *paragraphStyle;
 @property (nonatomic, readwrite) NSTextAlignment alignment;
 @property (nonatomic ,readwrite) NSInteger kern ;
+@property (nonatomic ,readwrite) CGFloat lineSpacing ;
+
 - (void)removeAttributes:(NSRange)range ;
 
 @end
