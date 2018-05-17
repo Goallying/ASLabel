@@ -37,7 +37,6 @@
     l.backgroundColor = [UIColor yellowColor];
     l.numberOfLines = 0 ;
     l.verticalAlignment = NSTextVerticalAlignmentTop ;
-//    l.kern = 10 ;
     l.font = [UIFont systemFontOfSize:17] ;
     l.text = @"灭霸被捕照片走红，模仿漫威搞笑漫画场景。《复仇者联盟3：无限战争》（Avengers： Infinity War）打破“超级英雄不能死”的印象，大反派灭霸成为众矢之的，因此一张“灭霸在多伦多遭到逮补”的照片令人振奋，瞬间在网络疯传多日，未料照片背后真相藏了超大的泪点。";
     [self.view addSubview:l];
@@ -49,6 +48,16 @@
 //    label.numberOfLines = 0 ;
 //    [self.view addSubview:label];
     
+    NSString * aNSString = @"NSString";
+    CFStringRef cfString = (__bridge CFStringRef)aNSString;
+    
+    //__bridge 简单互换,不涉及所有权转化,内存释放参照被转化对象释放方式。
+    //__bridge_transfer 只能用于 CF->OC， 内存由ARC 控制，不需要release
+    //__bridge_retained 只能用于 OC->CF， 内存不受ARC控制，需要release
+    NSString * aNSString2 = (__bridge_transfer NSString *)cfString ;
+    CFStringRef cfstring2 = (__bridge_retained CFStringRef)aNSString2;
+    
+//    NSString * aNSString3 = (__bridge NSString *)cfstring2 ;
 }
 
 
