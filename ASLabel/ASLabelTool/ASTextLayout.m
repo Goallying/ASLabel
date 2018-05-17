@@ -8,7 +8,6 @@
 
 #import "ASTextLayout.h"
 #import "ASTextLine.h"
-
 #import <CoreText/CoreText.h>
 
 const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};

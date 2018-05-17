@@ -28,6 +28,7 @@
     UIColor *_textColor ;
     NSTextAlignment _alignment ;
     NSTextVerticalAlignment _verticalAlignment ;
+    NSInteger _kern ;
     
 }
 
@@ -49,6 +50,7 @@
     _textColor = [UIColor blackColor];
     _alignment = NSTextAlignmentLeft ;
     _verticalAlignment = NSTextVerticalAlignmentCenter ;
+    _kern = 0 ;
     
     _innerText = [NSMutableAttributedString new];
 }
@@ -74,6 +76,7 @@
         _innerText.font = _font ;
         _innerText.color = _textColor ;
         _innerText.alignment = _alignment ;
+        _innerText.kern = _kern ;
     }
     [self.layer setNeedsDisplay];
 }
@@ -87,8 +90,10 @@
 - (void)setTextAlignment:(NSTextAlignment)textAlignment{
     if (_alignment == textAlignment) return;
     _alignment = textAlignment ;
-    _innerText.alignment = textAlignment ;
-    [self.layer setNeedsDisplay];
+    if (_innerText) {
+        _innerText.alignment = textAlignment ;
+        [self.layer setNeedsDisplay];
+    }
 }
 - (void)setVerticalAlignment:(NSTextVerticalAlignment)verticalAlignment{
     if(_verticalAlignment == verticalAlignment) return;
@@ -101,6 +106,24 @@
     _textContainer.numberOfLines = _numberOfLines;
     [self.layer setNeedsDisplay];
 }
+-(void)setFont:(UIFont *)font{
+    if (_font == font || [_font isEqual:font]) {
+        return ;
+    }
+    _font = font ;
+    if (_innerText) {
+        _innerText.font = font ;
+        [self.layer setNeedsDisplay];
+    }
+}
+- (void)setKern:(NSInteger)kern {
+    if (_kern == kern) return ;
+    _kern = kern ;
+    if (_innerText) {
+        _innerText.kern = kern ;
+        [self.layer setNeedsDisplay];
+    }
+}
 #pragma mark --
 #pragma mark -- 异步绘制
 - (AsyncLayerDisplayTask *)newAsyncDisplayTask {
@@ -112,6 +135,8 @@
     task.display = ^(CGContextRef context, CGSize size) {
         CGPoint verticalp = CGPointZero ; //if verticalAlignment == top
         ASTextLayout * layout = [ASTextLayout layoutWithContainer:_textContainer text:_innerText];
+        UIFont * f = _innerText.font ;
+        NSInteger kern = _innerText.kern ;
         //需要计算文本内容总高度。
         //may be a bug exist here or it's not a bug, when container's size <= container.inset rect. 纵向排版方式受insets 影响。
         if (_verticalAlignment == NSTextVerticalAlignmentCenter) {

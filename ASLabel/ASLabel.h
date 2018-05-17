@@ -19,6 +19,8 @@ typedef NS_ENUM(NSInteger, NSTextVerticalAlignment) {
 @property (nonatomic ,assign)NSTextAlignment textAlignment ;
 @property (nonatomic ,assign)NSTextVerticalAlignment verticalAlignment;
 @property (nonatomic ,assign)NSInteger numberOfLines ;
-@property (nonatomic) UIEdgeInsets textContainerInset;
+@property (nonatomic ,assign)UIEdgeInsets textContainerInset;
+@property (nonatomic ,assign)NSInteger kern ; // not reasonable here,this property belongs to 'NSAttributedString', but it's convenient;
+@property (nonatomic ,strong)UIFont * font ;
 
 @end

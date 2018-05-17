@@ -12,6 +12,9 @@
 
 @implementation NSAttributedString (ASAdd)
 
+- (NSDictionary *)attributes{
+   return [self attributesAtIndex:0 effectiveRange:NULL];
+}
 - (UIFont *)font{
     return [self attribute:NSFontAttributeName atIndex:0 effectiveRange:NULL];
 }
@@ -46,6 +49,9 @@
         }
     }
     return style;
+}
+- (NSInteger)kern{
+    return [[self attribute:NSKernAttributeName atIndex:0] integerValue];
 }
 - (id)attribute:(NSString *)attributeName atIndex:(NSUInteger)index {
     if (!attributeName) return nil;
@@ -92,6 +98,9 @@
         style.alignment = alignment;
         [self addAttribute:NSParagraphStyleAttributeName value:style range:range];
     }];
+}
+- (void)setKern:(NSInteger)kern {
+    [self addAttribute:NSKernAttributeName value:@(kern) range:NSMakeRange(0, self.length)];
 }
 - (void)removeAttributes:(NSRange)range{
     

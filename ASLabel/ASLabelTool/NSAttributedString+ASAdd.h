@@ -10,11 +10,13 @@
 
 @interface NSAttributedString (ASAdd)
 
+@property (nullable, nonatomic, strong, readonly)NSDictionary * attributes ;
 @property (nullable, nonatomic, strong, readonly) UIFont  *font;
 @property (nullable, nonatomic, strong, readonly) UIColor *color;
 @property (nullable, nonatomic, strong, readonly) UIColor *backgroundColor;
 @property (nonatomic, readonly) NSTextAlignment alignment;
 @property (nullable, nonatomic, strong, readonly) NSParagraphStyle *paragraphStyle;
+@property (nonatomic, assign, readonly) NSInteger kern;
 
 @end
 
@@ -25,10 +27,9 @@
 @property (nullable, nonatomic, strong, readwrite) UIFont  *font;
 @property (nullable, nonatomic, strong, readwrite) UIColor *color;
 @property (nullable, nonatomic, strong, readwrite) UIColor *backgroundColor;
-
 @property (nullable, nonatomic, strong, readwrite) NSParagraphStyle *paragraphStyle;
 @property (nonatomic, readwrite) NSTextAlignment alignment;
-
+@property (nonatomic ,readwrite) NSInteger kern ;
 - (void)removeAttributes:(NSRange)range ;
 
 @end

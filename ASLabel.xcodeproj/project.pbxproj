@@ -10,6 +10,7 @@
 		5548C4892079C7AC004D7368 /* ASTextContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5548C4882079C7AC004D7368 /* ASTextContainer.m */; };
 		5548C48C2079E17C004D7368 /* ASTextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5548C48B2079E17C004D7368 /* ASTextLine.m */; };
 		556AB44920AA826400907ED5 /* DisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 556AB44820AA826400907ED5 /* DisplayView.m */; };
+		5580AC5320AD500A0060E170 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5580AC5220AD500A0060E170 /* README.md */; };
 		AE48B69E20775CB300E3B1F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48B69D20775CB300E3B1F8 /* AppDelegate.m */; };
 		AE48B6A120775CB300E3B1F8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48B6A020775CB300E3B1F8 /* ViewController.m */; };
 		AE48B6A420775CB300E3B1F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE48B6A220775CB300E3B1F8 /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		5548C48B2079E17C004D7368 /* ASTextLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASTextLine.m; sourceTree = "<group>"; };
 		556AB44720AA826400907ED5 /* DisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisplayView.h; sourceTree = "<group>"; };
 		556AB44820AA826400907ED5 /* DisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisplayView.m; sourceTree = "<group>"; };
+		5580AC5220AD500A0060E170 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		AE48B69920775CB300E3B1F8 /* ASLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE48B69C20775CB300E3B1F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AE48B69D20775CB300E3B1F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		AE48B69B20775CB300E3B1F8 /* ASLabel */ = {
 			isa = PBXGroup;
 			children = (
+				5580AC5220AD500A0060E170 /* README.md */,
 				5548C48D2079E188004D7368 /* ASLabelTool */,
 				AE48B69C20775CB300E3B1F8 /* AppDelegate.h */,
 				AE48B69D20775CB300E3B1F8 /* AppDelegate.m */,
@@ -174,6 +177,7 @@
 			files = (
 				AE48B6A920775CB300E3B1F8 /* LaunchScreen.storyboard in Resources */,
 				AE48B6A620775CB300E3B1F8 /* Assets.xcassets in Resources */,
+				5580AC5320AD500A0060E170 /* README.md in Resources */,
 				AE48B6A420775CB300E3B1F8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
