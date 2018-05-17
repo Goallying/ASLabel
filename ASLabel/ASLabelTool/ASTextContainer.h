@@ -12,6 +12,7 @@
 
 @property (nonatomic ,assign)CGSize size ;
 @property (nonatomic ,assign)UIEdgeInsets insets ;
+@property (nonatomic ,assign)NSInteger numberOfLines ;
 
 + (instancetype)containerWithSize:(CGSize)size insets:(UIEdgeInsets)insets ;
 

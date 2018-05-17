@@ -91,6 +91,12 @@
     _verticalAlignment = verticalAlignment ;
     [self.layer setNeedsDisplay];
 }
+- (void)setNumberOfLines:(NSInteger)numberOfLines{
+    if(_numberOfLines == numberOfLines) return ;
+    _numberOfLines = numberOfLines ;
+    _textContainer.numberOfLines = _numberOfLines;
+    [self.layer setNeedsDisplay];
+}
 #pragma mark --
 #pragma mark -- 异步绘制
 - (AsyncLayerDisplayTask *)newAsyncDisplayTask {
@@ -110,6 +116,7 @@
             if (size.height - _textContainer.insets.top >= layout.textBoundingRect.size.height) {
                 verticalp.y = size.height - layout.textBoundingRect.size.height - _textContainer.insets.top;
             }else{
+                //如果insets都超过文本显示区域，文本就不显示。
                 verticalp.y = size.height - layout.textBoundingRect.size.height ;
             }
         }

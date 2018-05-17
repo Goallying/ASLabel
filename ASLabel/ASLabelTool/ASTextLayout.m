@@ -41,13 +41,17 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
         position.x = boxRect.origin.x + ctLineOrigin.x;
         position.y = boxRect.size.height + boxRect.origin.y - ctLineOrigin.y;
         
-        ASTextLine * textline = [ASTextLine lineWithCTLine:l position:position];
-        [textLines addObject:textline];
-        
+        ASTextLine * textline ;
+        if (i < container.numberOfLines || container.numberOfLines == 0) {
+            textline = [ASTextLine lineWithCTLine:l position:position];
+            [textLines addObject:textline];
+        }
         if (i == 0) {
             textBoundingRect = textline.bounds;
         }else{
-            textBoundingRect = CGRectUnion(textBoundingRect, textline.bounds);
+            if (container.numberOfLines == 0 || i < container.numberOfLines) {
+                textBoundingRect = CGRectUnion(textBoundingRect, textline.bounds);
+            }
         }
     }
     layout.lines = textLines ;
