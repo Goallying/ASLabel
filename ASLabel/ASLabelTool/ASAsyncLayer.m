@@ -33,25 +33,9 @@
     CGSize size = self.bounds.size;
     BOOL opaque = self.opaque;
     CGFloat scale = [UIScreen mainScreen].scale;
-//    CGColorRef backgroundColor = (opaque && self.backgroundColor) ? CGColorRetain(self.backgroundColor) : NULL;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         UIGraphicsBeginImageContextWithOptions(size, opaque, scale);
         CGContextRef context = UIGraphicsGetCurrentContext();
-//        if (opaque && context) {
-//            CGContextSaveGState(context); {
-//                if (!backgroundColor || CGColorGetAlpha(backgroundColor) < 1) {
-//                    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-//                    CGContextAddRect(context, CGRectMake(0, 0, size.width * scale, size.height * scale));
-//                    CGContextFillPath(context);
-//                }
-//                if (backgroundColor) {
-//                    CGContextSetFillColorWithColor(context, backgroundColor);
-//                    CGContextAddRect(context, CGRectMake(0, 0, size.width * scale, size.height * scale));
-//                    CGContextFillPath(context);
-//                }
-//            } CGContextRestoreGState(context);
-//            CGColorRelease(backgroundColor);
-//        }
         if (task.display) {
             task.display(context, size);
         }

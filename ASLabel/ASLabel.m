@@ -78,6 +78,9 @@
     [self.layer setNeedsDisplay];
 }
 - (void)setTextContainerInset:(UIEdgeInsets)textContainerInset{
+    if (UIEdgeInsetsEqualToEdgeInsets(_textContainer.insets, textContainerInset)) {
+        return;
+    }
     _textContainer.insets = textContainerInset ;
     [self.layer setNeedsDisplay];
 }
@@ -88,6 +91,7 @@
     [self.layer setNeedsDisplay];
 }
 - (void)setVerticalAlignment:(NSTextVerticalAlignment)verticalAlignment{
+    if(_verticalAlignment == verticalAlignment) return;
     _verticalAlignment = verticalAlignment ;
     [self.layer setNeedsDisplay];
 }
