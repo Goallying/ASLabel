@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 typedef NS_ENUM(NSInteger, NSTextVerticalAlignment) {
     NSTextVerticalAlignmentTop =    0, ///< Top alignment.
-    NSTextVerticalAlignmentCenter = 1, ///< Center alignment.
+    NSTextVerticalAlignmentCenter = 1, ///< Center alignment.defalut value!
     NSTextVerticalAlignmentBottom = 2, ///< Bottom alignment.
 };
 

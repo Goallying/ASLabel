@@ -26,23 +26,6 @@
     if (!style) style = [NSParagraphStyle defaultParagraphStyle];
     return style.alignment;
 }
-@end
-
-@implementation NSMutableAttributedString (TextAdd)
-
-- (void)setFont:(UIFont *)font{
-    [self addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, self.length)];
-}
-- (void)setColor:(UIColor *)color{
-    [self addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, self.length)];
-}
-- (void)setBackgroundColor:(UIColor *)backgroundColor {
-    [self addAttribute:NSBackgroundColorAttributeName value:backgroundColor range:NSMakeRange(0, self.length)];
-}
-
--(void)setParagraphStyle:(NSParagraphStyle *)paragraphStyle{
-    [self addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, self.length)];
-}
 - (NSParagraphStyle *)paragraphStyle{
     
     return [self paragraphStyleAtIndex:0];
@@ -69,6 +52,23 @@
     if (index > self.length || self.length == 0) return nil;
     if (self.length > 0 && index == self.length) index--;
     return [self attribute:attributeName atIndex:index effectiveRange:NULL];
+}
+@end
+
+@implementation NSMutableAttributedString (TextAdd)
+
+- (void)setFont:(UIFont *)font{
+    [self addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, self.length)];
+}
+- (void)setColor:(UIColor *)color{
+    [self addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, self.length)];
+}
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+    [self addAttribute:NSBackgroundColorAttributeName value:backgroundColor range:NSMakeRange(0, self.length)];
+}
+
+-(void)setParagraphStyle:(NSParagraphStyle *)paragraphStyle{
+    [self addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, self.length)];
 }
 
 - (void)setAlignment:(NSTextAlignment)alignment{

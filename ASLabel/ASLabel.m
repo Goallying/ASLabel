@@ -89,6 +89,7 @@
 }
 - (void)setVerticalAlignment:(NSTextVerticalAlignment)verticalAlignment{
     _verticalAlignment = verticalAlignment ;
+    [self.layer setNeedsDisplay];
 }
 #pragma mark --
 #pragma mark -- 异步绘制
@@ -100,13 +101,19 @@
     };
     task.display = ^(CGContextRef context, CGSize size) {
         CGPoint verticalp = CGPointZero ; //if verticalAlignment == top
-        //需要计算文本内容总高度。
-        if (_verticalAlignment == NSTextVerticalAlignmentCenter) {
-        }else if (_verticalAlignment == NSTextVerticalAlignmentBottom){
-            
-        }
         ASTextLayout * layout = [ASTextLayout layoutWithContainer:_textContainer text:_innerText];
-        [layout drawInContext:context size:size];
+        //需要计算文本内容总高度。
+        //may be a bug exist here or it's not a bug, when container's size <= container.inset rect. 纵向排版方式受insets 影响。
+        if (_verticalAlignment == NSTextVerticalAlignmentCenter) {
+            verticalp.y = (size.height - layout.textBoundingRect.size.height) / 2 + _textContainer.insets.top ;
+        }else if (_verticalAlignment == NSTextVerticalAlignmentBottom){
+            if (size.height - _textContainer.insets.top >= layout.textBoundingRect.size.height) {
+                verticalp.y = size.height - layout.textBoundingRect.size.height - _textContainer.insets.top;
+            }else{
+                verticalp.y = size.height - layout.textBoundingRect.size.height ;
+            }
+        }
+        [layout drawInContext:context size:size point:verticalp];
         NSLog(@"display...");
     };
     task.didDisplay = ^(CALayer *layer, BOOL finished) {

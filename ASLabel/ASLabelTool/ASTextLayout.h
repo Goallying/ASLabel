@@ -16,8 +16,9 @@
 @property (nonatomic, strong) NSAttributedString *text;
 @property (nonatomic, strong) ASTextContainer *container;
 @property (nonatomic ,strong) NSArray<ASTextLine *> *lines ;
+@property (nonatomic ,assign)CGRect textBoundingRect ;
 
 + (ASTextLayout *)layoutWithContainer:(ASTextContainer *)container text:(NSAttributedString *)text ;
-- (void)drawInContext:(CGContextRef)ctx size:(CGSize)size ;
+- (void)drawInContext:(CGContextRef)ctx size:(CGSize)size point:(CGPoint)point;
 
 @end

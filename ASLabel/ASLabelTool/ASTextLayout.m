@@ -32,6 +32,7 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
     CTFrameGetLineOrigins(frame, CFRangeMake(0, lineCount), lineOrigins);
     
     NSMutableArray * textLines = [NSMutableArray array];
+    CGRect textBoundingRect = CGRectZero ;
     for (int i = 0 ; i < lineCount;  i ++) {
         CTLineRef l = CFArrayGetValueAtIndex(lines, i);
         CGPoint ctLineOrigin = lineOrigins[i];
@@ -42,18 +43,25 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
         
         ASTextLine * textline = [ASTextLine lineWithCTLine:l position:position];
         [textLines addObject:textline];
+        
+        if (i == 0) {
+            textBoundingRect = textline.bounds;
+        }else{
+            textBoundingRect = CGRectUnion(textBoundingRect, textline.bounds);
+        }
     }
     layout.lines = textLines ;
-    
+    layout.textBoundingRect = textBoundingRect ;
     CFRelease(path);
     CFRelease(frameSetter);
     CFRelease(frame);
     return layout;
 }
 
-- (void)drawInContext:(CGContextRef)ctx size:(CGSize)size {
+- (void)drawInContext:(CGContextRef)ctx size:(CGSize)size point:(CGPoint)point {
     CGContextSaveGState(ctx);{
-        CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
+//        CGContextSetTextMatrix(ctx, CGAffineTransformIdentity);
+        CGContextTranslateCTM(ctx, point.x, point.y);
         CGContextTranslateCTM(ctx, 0,size.height);
         CGContextScaleCTM(ctx, 1, -1);
         for (int i = 0; i < _lines.count; i ++) {

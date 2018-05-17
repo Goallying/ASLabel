@@ -33,8 +33,9 @@
 //    [self.view addSubview:lbl];
     
     ASLabel * l = [[ASLabel alloc]initWithFrame:self.view.bounds];
-    l.textContainerInset = UIEdgeInsetsMake(20, 0, 0, 0);
+    l.textContainerInset = UIEdgeInsetsMake(0, 0, 0, 0);
     l.textAlignment = NSTextAlignmentRight ;
+    l.verticalAlignment = NSTextAlignmentCenter ;
     l.backgroundColor = [UIColor yellowColor];
     l.text = @"Hello world";
     [self.view addSubview:l];
