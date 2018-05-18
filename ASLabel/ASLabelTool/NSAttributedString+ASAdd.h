@@ -20,9 +20,7 @@
 @property (nonatomic, assign, readonly) NSInteger kern;
 @property (nonatomic ,assign, readonly) CGFloat lineSpacing ;
 
-+ (NSMutableAttributedString *_Nullable)attachmentWithContent:(id _Nullable )content
-                                                size:(CGSize)size
-                                       textAlignment:(NSTextVerticalAlignment)alignment ;
+
 @end
 
 
@@ -36,7 +34,10 @@
 @property (nonatomic, readwrite) NSTextAlignment alignment;
 @property (nonatomic ,readwrite) NSInteger kern ;
 @property (nonatomic ,readwrite) CGFloat lineSpacing ;
-
++ (NSMutableAttributedString *_Nullable)attachmentWithContent:(id _Nullable )content
+                                                     font:(UIFont *)font
+                                                         size:(CGSize)size
+                                                textAlignment:(NSTextVerticalAlignment)alignment ;
 - (void)setTextAttachment:(ASAttachment *_Nonnull)textAttachment range:(NSRange)range ;
 - (void)removeAttributes:(NSRange)range ;
 

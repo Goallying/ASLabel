@@ -66,23 +66,6 @@
     return [self attribute:attributeName atIndex:index effectiveRange:NULL];
 }
 
-
-+ (NSMutableAttributedString *)attachmentWithContent:(id)content size:(CGSize)size textAlignment:(NSTextVerticalAlignment)alignment {
-    
-    NSMutableAttributedString * atr = [[NSMutableAttributedString alloc]initWithString:ASTextAttachmentToken];
-    ASAttachment * attachment = [ASAttachment attachmentWithContent:content];
-    [atr setTextAttachment:attachment range:NSMakeRange(0, atr.length)];
-    
-    ASRunDelegate * rundelegate = [ASRunDelegate new];
-    rundelegate.size = size ;
-    rundelegate.ascent = size.height ;
-    rundelegate.descent = 0 ;
-    
-    CTRunDelegateRef rundelegateRef = rundelegate.CTRunDelegate ;
-    [atr addAttribute:(id)kCTRunDelegateAttributeName value:(__bridge id)rundelegateRef range:NSMakeRange(0, atr.length)];
-    if(rundelegateRef) CFRelease(rundelegateRef);
-    return atr ;
-}
 @end
 
 @implementation NSMutableAttributedString (TextAdd)
@@ -147,6 +130,33 @@
 }
 - (void)setKern:(NSInteger)kern {
     [self addAttribute:NSKernAttributeName value:@(kern) range:NSMakeRange(0, self.length)];
+}
+
++ (NSMutableAttributedString *_Nullable)attachmentWithContent:(id _Nullable )content
+                                                     font:(UIFont *)font
+                                                         size:(CGSize)size
+                                                textAlignment:(NSTextVerticalAlignment)alignment {
+    
+    NSMutableAttributedString * atr = [[NSMutableAttributedString alloc]initWithString:ASTextAttachmentToken];
+    ASAttachment * attachment = [ASAttachment attachmentWithContent:content];
+    [atr setTextAttachment:attachment range:NSMakeRange(0, atr.length)];
+
+    ASRunDelegate * rundelegate = [ASRunDelegate new];
+    rundelegate.size = size ;
+    //wierd。alignmentcenter.
+    CGFloat fontHeight = font.ascender - font.descender;
+    CGFloat yOffset = font.ascender - fontHeight * 0.5;
+    NSLog(@"as == %f ,des == %f",font.ascender ,font.descender);
+    rundelegate.ascent = size.height * 0.5 + yOffset;
+    rundelegate.descent = size.height - rundelegate.ascent;
+    if (rundelegate.descent < 0) {
+        rundelegate.descent = 0;
+        rundelegate.ascent = size.height;
+    }
+    CTRunDelegateRef rundelegateRef = rundelegate.CTRunDelegate ;
+    [atr addAttribute:(id)kCTRunDelegateAttributeName value:(__bridge id)rundelegateRef range:NSMakeRange(0, atr.length)];
+    if(rundelegateRef) CFRelease(rundelegateRef);
+    return atr ;
 }
 - (void)removeAttributes:(NSRange)range{
     

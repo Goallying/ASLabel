@@ -84,7 +84,15 @@
     [self.layer setNeedsDisplay];
 }
 - (void)setAttributedText:(NSAttributedString *)attributedText {
+    BOOL needResetAttributes = (_innerText.length == 0 && attributedText.length > 0) ;
     _innerText = attributedText.mutableCopy ;
+    if (needResetAttributes) {
+        _innerText.font = _font ;
+        _innerText.color = _textColor ;
+        _innerText.alignment = _alignment ;
+        _innerText.kern = _characterSpacing ;
+        _innerText.lineSpacing = _lineSpacing ;
+    }
     [self.layer setNeedsDisplay];
 }
 

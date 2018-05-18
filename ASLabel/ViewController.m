@@ -35,7 +35,7 @@
     NSMutableAttributedString * s  = [[NSMutableAttributedString alloc]initWithString:@"灭霸被捕照片走红，模仿漫威搞笑漫画场景。《复仇者联盟3：无限战争》（Avengers： Infinity War）打破“超级英雄不能死”的印象，大反派灭霸成为众矢之的，因此一张“灭霸在多伦多遭到逮补”的照片令人振奋，瞬间在网络疯传多日，未料照片背后真相藏了超大的泪点。"];
     
     UIImage * image = [UIImage imageNamed:@"baskatball"];
-    NSMutableAttributedString * attach = [NSMutableAttributedString attachmentWithContent:image size:image.size textAlignment:NSTextVerticalAlignmentCenter];
+    NSMutableAttributedString * attach = [NSMutableAttributedString attachmentWithContent:image font:[UIFont systemFontOfSize:20] size:image.size textAlignment:NSTextVerticalAlignmentCenter];
     [s appendAttributedString:attach];
     [s appendAttributedString:s.mutableCopy];
     
