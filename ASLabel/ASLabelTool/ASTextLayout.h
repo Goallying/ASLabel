@@ -16,7 +16,11 @@
 @property (nonatomic, strong) NSAttributedString *text;
 @property (nonatomic, strong) ASTextContainer *container;
 @property (nonatomic ,strong) NSArray<ASTextLine *> *lines ;
-@property (nonatomic ,assign)CGRect textBoundingRect ;
+@property (nonatomic ,assign) CGRect textBoundingRect ;
+
+@property (nonatomic ,strong)NSArray <ASAttachment *>* attachments ;
+@property (nonatomic ,strong)NSArray <NSValue *>* attachmentRanges;
+@property (nonatomic ,strong)NSArray <NSValue *>* attachmentRects ;
 
 + (ASTextLayout *)layoutWithContainer:(ASTextContainer *)container text:(NSAttributedString *)text ;
 - (void)drawInContext:(CGContextRef)ctx size:(CGSize)size point:(CGPoint)point;

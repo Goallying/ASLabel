@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
+#import "ASAttachment.h"
 
 @interface ASTextLine : NSObject
 
@@ -19,6 +20,9 @@
 @property (nonatomic, readonly) CGRect bounds;
 @property (nonatomic, readonly) CTLineRef CTLine;
 
+@property (nonatomic ,readonly)NSArray <ASAttachment *>* attachments ;
+@property (nonatomic ,readonly)NSArray <NSValue *>* attachmentRanges;
+@property (nonatomic ,readonly)NSArray <NSValue *>* attachmentRects ;
 + (instancetype)lineWithCTLine:(CTLineRef)CTLine position:(CGPoint)position ;
 
 @end

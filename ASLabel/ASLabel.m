@@ -83,6 +83,11 @@
     }
     [self.layer setNeedsDisplay];
 }
+- (void)setAttributedText:(NSAttributedString *)attributedText {
+    _innerText = attributedText.mutableCopy ;
+    [self.layer setNeedsDisplay];
+}
+
 - (void)setTextContainerInset:(UIEdgeInsets)textContainerInset{
     if (UIEdgeInsetsEqualToEdgeInsets(_textContainer.insets, textContainerInset)) {
         return;

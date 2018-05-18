@@ -7,15 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef NS_ENUM(NSInteger, NSTextVerticalAlignment) {
-    NSTextVerticalAlignmentTop =    0, ///< Top alignment.
-    NSTextVerticalAlignmentCenter = 1, ///< Center alignment.defalut value!
-    NSTextVerticalAlignmentBottom = 2, ///< Bottom alignment.
-};
-
+#import "ASTextMacro.h"
+#import "NSAttributedString+ASAdd.h"
 @interface ASLabel : UIView
 
 @property (nonatomic ,copy)NSString * text ;
+@property (nonatomic ,copy)NSAttributedString * attributedText ;
 @property (nonatomic ,assign)NSTextAlignment textAlignment ;
 @property (nonatomic ,assign)NSTextVerticalAlignment verticalAlignment;
 @property (nonatomic ,assign)NSInteger numberOfLines ;

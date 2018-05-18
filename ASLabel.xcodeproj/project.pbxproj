@@ -11,6 +11,9 @@
 		5548C48C2079E17C004D7368 /* ASTextLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5548C48B2079E17C004D7368 /* ASTextLine.m */; };
 		556AB44920AA826400907ED5 /* DisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 556AB44820AA826400907ED5 /* DisplayView.m */; };
 		5580AC5320AD500A0060E170 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5580AC5220AD500A0060E170 /* README.md */; };
+		55DFAAFC20AE9CD5004A08B8 /* ASAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DFAAFB20AE9CD5004A08B8 /* ASAttachment.m */; };
+		55DFAAFF20AEA00E004A08B8 /* ASRunDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DFAAFE20AEA00E004A08B8 /* ASRunDelegate.m */; };
+		55DFAB0220AEA5BC004A08B8 /* ASTextMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DFAB0120AEA5BC004A08B8 /* ASTextMacro.m */; };
 		AE48B69E20775CB300E3B1F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48B69D20775CB300E3B1F8 /* AppDelegate.m */; };
 		AE48B6A120775CB300E3B1F8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE48B6A020775CB300E3B1F8 /* ViewController.m */; };
 		AE48B6A420775CB300E3B1F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE48B6A220775CB300E3B1F8 /* Main.storyboard */; };
@@ -31,6 +34,12 @@
 		556AB44720AA826400907ED5 /* DisplayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisplayView.h; sourceTree = "<group>"; };
 		556AB44820AA826400907ED5 /* DisplayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisplayView.m; sourceTree = "<group>"; };
 		5580AC5220AD500A0060E170 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		55DFAAFA20AE9CD5004A08B8 /* ASAttachment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASAttachment.h; sourceTree = "<group>"; };
+		55DFAAFB20AE9CD5004A08B8 /* ASAttachment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASAttachment.m; sourceTree = "<group>"; };
+		55DFAAFD20AEA00E004A08B8 /* ASRunDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASRunDelegate.h; sourceTree = "<group>"; };
+		55DFAAFE20AEA00E004A08B8 /* ASRunDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASRunDelegate.m; sourceTree = "<group>"; };
+		55DFAB0020AEA5BC004A08B8 /* ASTextMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASTextMacro.h; sourceTree = "<group>"; };
+		55DFAB0120AEA5BC004A08B8 /* ASTextMacro.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASTextMacro.m; sourceTree = "<group>"; };
 		AE48B69920775CB300E3B1F8 /* ASLabel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASLabel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE48B69C20775CB300E3B1F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AE48B69D20775CB300E3B1F8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -71,8 +80,14 @@
 				5548C4882079C7AC004D7368 /* ASTextContainer.m */,
 				AE66BFC32078E6E300C4459A /* ASAsyncLayer.h */,
 				AE66BFC42078E6E300C4459A /* ASAsyncLayer.m */,
+				55DFAB0020AEA5BC004A08B8 /* ASTextMacro.h */,
+				55DFAB0120AEA5BC004A08B8 /* ASTextMacro.m */,
 				5548C48A2079E17C004D7368 /* ASTextLine.h */,
 				5548C48B2079E17C004D7368 /* ASTextLine.m */,
+				55DFAAFA20AE9CD5004A08B8 /* ASAttachment.h */,
+				55DFAAFB20AE9CD5004A08B8 /* ASAttachment.m */,
+				55DFAAFD20AEA00E004A08B8 /* ASRunDelegate.h */,
+				55DFAAFE20AEA00E004A08B8 /* ASRunDelegate.m */,
 				AE48B6B8207765D800E3B1F8 /* NSAttributedString+ASAdd.h */,
 				AE48B6B9207765D800E3B1F8 /* NSAttributedString+ASAdd.m */,
 			);
@@ -191,9 +206,12 @@
 			files = (
 				5548C4892079C7AC004D7368 /* ASTextContainer.m in Sources */,
 				AE48B6BA207765D800E3B1F8 /* NSAttributedString+ASAdd.m in Sources */,
+				55DFAB0220AEA5BC004A08B8 /* ASTextMacro.m in Sources */,
 				AE48B6B42077626600E3B1F8 /* ASLabel.m in Sources */,
+				55DFAAFC20AE9CD5004A08B8 /* ASAttachment.m in Sources */,
 				AE48B6A120775CB300E3B1F8 /* ViewController.m in Sources */,
 				AE48B6AC20775CB300E3B1F8 /* main.m in Sources */,
+				55DFAAFF20AEA00E004A08B8 /* ASRunDelegate.m in Sources */,
 				AE66BFC52078E6E300C4459A /* ASAsyncLayer.m in Sources */,
 				AE48B69E20775CB300E3B1F8 /* AppDelegate.m in Sources */,
 				AE48B6B72077641100E3B1F8 /* ASTextLayout.m in Sources */,

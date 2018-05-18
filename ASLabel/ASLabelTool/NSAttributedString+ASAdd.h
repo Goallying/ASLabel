@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ASAttachment.h"
+#import "ASTextMacro.h"
 @interface NSAttributedString (ASAdd)
 
 @property (nullable, nonatomic, strong, readonly)NSDictionary * attributes ;
@@ -19,6 +20,9 @@
 @property (nonatomic, assign, readonly) NSInteger kern;
 @property (nonatomic ,assign, readonly) CGFloat lineSpacing ;
 
++ (NSMutableAttributedString *_Nullable)attachmentWithContent:(id _Nullable )content
+                                                size:(CGSize)size
+                                       textAlignment:(NSTextVerticalAlignment)alignment ;
 @end
 
 
@@ -33,6 +37,7 @@
 @property (nonatomic ,readwrite) NSInteger kern ;
 @property (nonatomic ,readwrite) CGFloat lineSpacing ;
 
+- (void)setTextAttachment:(ASAttachment *_Nonnull)textAttachment range:(NSRange)range ;
 - (void)removeAttributes:(NSRange)range ;
 
 @end

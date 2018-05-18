@@ -32,6 +32,9 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
     
     NSMutableArray * textLines = [NSMutableArray array];
     CGRect textBoundingRect = CGRectZero ;
+    NSMutableArray * allAttachments = [NSMutableArray array];
+    NSMutableArray * allAttachmentRanges = [NSMutableArray array];
+    NSMutableArray * allAttachmentRects = [NSMutableArray array];
     for (int i = 0 ; i < lineCount;  i ++) {
         CTLineRef l = CFArrayGetValueAtIndex(lines, i);
         CGPoint ctLineOrigin = lineOrigins[i];
@@ -43,6 +46,9 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
         if (i < container.numberOfLines || container.numberOfLines == 0) {
             textline = [ASTextLine lineWithCTLine:l position:position];
             [textLines addObject:textline];
+            [allAttachments addObjectsFromArray:textline.attachments];
+            [allAttachmentRanges addObjectsFromArray:textline.attachmentRanges];
+            [allAttachmentRects addObjectsFromArray:textline.attachmentRects];
         }
         if (i == 0) {
             textBoundingRect = textline.bounds;
@@ -54,6 +60,9 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
     }
     layout.lines = textLines ;
     layout.textBoundingRect = textBoundingRect ;
+    layout.attachments = allAttachments ;
+    layout.attachmentRanges = allAttachmentRanges ;
+    layout.attachmentRects = allAttachmentRects ;
     
     CFRelease(path);
     CFRelease(frameSetter);
@@ -84,6 +93,26 @@ const CGSize ASTextContainerMaxSize = (CGSize){0x100000, 0x100000};
             }
         }
     }CGContextRestoreGState(ctx);
+    
+    if (self.attachments && self.attachments.count > 0) {
+        for (int i = 0; i < self.attachments.count; i ++ ) {
+            ASAttachment * attachment = self.attachments[i];
+            if ([attachment.content isKindOfClass:[UIImage class]]) {
+                UIImage * image = attachment.content ;
+                CGRect rect = ((NSValue *)self.attachmentRects[i]).CGRectValue;
+                rect.origin.x += point.x;
+                rect.origin.y += point.y;
+                CGImageRef ref = image.CGImage;
+                if (ref) {
+                    CGContextSaveGState(ctx);
+                    CGContextTranslateCTM(ctx, 0, CGRectGetMaxY(rect) + CGRectGetMinY(rect));
+                    CGContextScaleCTM(ctx, 1, -1);
+                    CGContextDrawImage(ctx, rect, ref);
+                    CGContextRestoreGState(ctx);
+                }
+            }
+        }
+    }
 }
 
 @end

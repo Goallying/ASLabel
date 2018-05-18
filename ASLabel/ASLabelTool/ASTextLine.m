@@ -8,7 +8,7 @@
 //
 
 #import "ASTextLine.h"
-
+#import "ASTextMacro.h"
 @implementation ASTextLine {
     CGFloat _firstGlyphPos ;
 }
@@ -43,6 +43,44 @@
     }
     _bounds = CGRectMake(_position.x, _position.y - _ascent, _lineWidth, _ascent + _descent);
     _bounds.origin.x += _firstGlyphPos;
+    
+    //attachment.
+    if (!_CTLine) return;
+    CFArrayRef runs = CTLineGetGlyphRuns(_CTLine);
+    NSUInteger runCount = CFArrayGetCount(runs);
+    if (runCount == 0) return;
+    
+    NSMutableArray *attachments = [NSMutableArray new];
+    NSMutableArray *attachmentRanges = [NSMutableArray new];
+    NSMutableArray *attachmentRects = [NSMutableArray new];
+    for (NSUInteger r = 0; r < runCount; r++) {
+        CTRunRef run = CFArrayGetValueAtIndex(runs, r);
+        CFIndex glyphCount = CTRunGetGlyphCount(run);
+        if (glyphCount == 0) continue;
+        NSDictionary *attrs = (id)CTRunGetAttributes(run);
+        ASAttachment *attachment = attrs[ASTextAttachmentAttributeName];
+        if (attachment) {
+            CGPoint runPosition = CGPointZero;
+            CTRunGetPositions(run, CFRangeMake(0, 1), &runPosition);
+            
+            CGFloat ascent, descent, leading, runWidth;
+            CGRect runTypoBounds;
+            runWidth = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, &leading);
+            
+            runPosition.x += _position.x;
+            runPosition.y = _position.y - runPosition.y;
+            runTypoBounds = CGRectMake(runPosition.x, runPosition.y - ascent, runWidth, ascent + descent);
+            
+            CFRange range = CTRunGetStringRange(run) ;
+            NSRange runRange = NSMakeRange(range.location, range.length);
+            [attachments addObject:attachment];
+            [attachmentRanges addObject:[NSValue valueWithRange:runRange]];
+            [attachmentRects addObject:[NSValue valueWithCGRect:runTypoBounds]];
+        }
+    }
+    _attachments = attachments.count ? attachments : nil;
+    _attachmentRanges = attachmentRanges.count ? attachmentRanges : nil;
+    _attachmentRects = attachmentRects.count ? attachmentRects : nil;
 }
 
 @end

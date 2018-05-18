@@ -7,8 +7,8 @@
 //
 
 #import "NSAttributedString+ASAdd.h"
+#import "ASRunDelegate.h"
 #import <CoreText/CoreText.h>
-
 
 @implementation NSAttributedString (ASAdd)
 
@@ -64,6 +64,24 @@
     if (index > self.length || self.length == 0) return nil;
     if (self.length > 0 && index == self.length) index--;
     return [self attribute:attributeName atIndex:index effectiveRange:NULL];
+}
+
+
++ (NSMutableAttributedString *)attachmentWithContent:(id)content size:(CGSize)size textAlignment:(NSTextVerticalAlignment)alignment {
+    
+    NSMutableAttributedString * atr = [[NSMutableAttributedString alloc]initWithString:ASTextAttachmentToken];
+    ASAttachment * attachment = [ASAttachment attachmentWithContent:content];
+    [atr setTextAttachment:attachment range:NSMakeRange(0, atr.length)];
+    
+    ASRunDelegate * rundelegate = [ASRunDelegate new];
+    rundelegate.size = size ;
+    rundelegate.ascent = size.height ;
+    rundelegate.descent = 0 ;
+    
+    CTRunDelegateRef rundelegateRef = rundelegate.CTRunDelegate ;
+    [atr addAttribute:(id)kCTRunDelegateAttributeName value:(__bridge id)rundelegateRef range:NSMakeRange(0, atr.length)];
+    if(rundelegateRef) CFRelease(rundelegateRef);
+    return atr ;
 }
 @end
 
@@ -138,7 +156,9 @@
     }
     
 }
-
+- (void)setTextAttachment:(ASAttachment *)textAttachment range:(NSRange)range {
+    [self addAttribute:ASTextAttachmentAttributeName value:textAttachment range:range];
+}
 + (NSArray *)allDiscontinuousAttributeKeys {
     static NSArray *keys;
     static dispatch_once_t onceToken;
